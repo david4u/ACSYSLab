@@ -33,13 +33,12 @@ int** matmul1(int** m1, int** m2) {
 	int n = sizeof(m1);
 	int** ret = makeZero(n);
 	for (int r = 0; r < n; r++) {
-		
+		for (int c = 0; c < n; c++) {
+			for (int i = 0; i < n ; i++) {
+				ret[r][c] += m1[r][i] * m2[i][c];
+			}
+		}
 	}
-
-
-
-
-
 	return ret;
 }
 
@@ -47,7 +46,7 @@ int main() {
 	// initiallize
 	int** mat1 = makeMAT(2048);
 	int** mat2 = makeMAT(2048);
-	int** mat3 = makeZero(2048);
+	int** mat3 = matmul1(mat1, mat2);
 
 
 }
