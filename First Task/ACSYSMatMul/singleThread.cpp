@@ -29,8 +29,7 @@ int** makeZero(int n) {
 	return mat;
 }
 
-int** matmul1(int** m1, int** m2) {
-	int n = sizeof(m1);
+int** matmul1(int** m1, int** m2, int n) {
 	int** ret = makeZero(n);
 	for (int r = 0; r < n; r++) {
 		for (int c = 0; c < n; c++) {
@@ -39,6 +38,7 @@ int** matmul1(int** m1, int** m2) {
 			}
 		}
 	}
+	cout << "done\n";
 	return ret;
 }
 
@@ -46,7 +46,31 @@ int main() {
 	// initiallize
 	int** mat1 = makeMAT(2048);
 	int** mat2 = makeMAT(2048);
-	int** mat3 = matmul1(mat1, mat2);
+	int** mat3 = matmul1(mat1, mat2, 2048);
 
+	int** test1 = makeMAT(15);
+	int** test2 = makeMAT(15);
+	int** test3 = matmul1(test1, test2, 15);
+
+	for(int i = 0 ;i < 15; i++) {
+		for (int j = 0 ;j < 15; j++) {
+			cout << test1[i][j] << " ";
+		}
+		cout << '\n';
+	}
+	cout << "=====================================\n";
+	for(int i = 0 ;i < 15; i++) {
+		for (int j = 0 ;j < 15; j++) {
+			cout << test2[i][j] << " ";
+		}
+		cout << '\n';
+	}
+	cout << "=====================================\n";
+	for(int i = 0 ;i < 15; i++) {
+		for (int j = 0 ;j < 15; j++) {
+			cout << test3[i][j] << " ";
+		}
+		cout << '\n';
+	}
 
 }
