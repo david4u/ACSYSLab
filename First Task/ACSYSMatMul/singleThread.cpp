@@ -29,7 +29,7 @@ int** makeZero(int n) {
 	return mat;
 }
 
-int** matmul1(int** m1, int** m2, int n) {
+int** matmul1(int** m1, int** m2, int n) { // n -> original size, m-> parted size
 	int** ret = makeZero(n);
 	for (int r = 0; r < n; r++) {
 		for (int c = 0; c < n; c++) {
@@ -51,4 +51,10 @@ int main() {
 	int** mat3 = matmul1(mat1, mat2, 2048);
 	end = clock();
 	cout << "Time : " << (double)(end - start) << " ms. \n";
+	for (int i = 0; i < 2048; i++) delete[] mat1[i];
+	for (int i = 0; i < 2048; i++) delete[] mat2[i];
+	for (int i = 0; i < 2048; i++) delete[] mat3[i];
+	delete[] mat1;
+	delete[] mat2;
+	delete[] mat3;
 }
