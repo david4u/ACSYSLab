@@ -1,5 +1,5 @@
 #include <iostream>
-#include <array>
+#include <time.h>
 
 using namespace std;
 
@@ -44,37 +44,11 @@ int** matmul1(int** m1, int** m2, int n) {
 
 int main() {
 	// initiallize
-	cout << "a\n";
+	clock_t start, end;
 	int** mat1 = makeMAT(2048);
-	cout << "b\n";
 	int** mat2 = makeMAT(2048);
-	cout << "c\n";
+	start = clock();
 	int** mat3 = matmul1(mat1, mat2, 2048);
-	cout << "d\n";
-
-	int** test1 = makeMAT(15);
-	int** test2 = makeMAT(15);
-	int** test3 = matmul1(test1, test2, 15);
-
-	for(int i = 0 ;i < 15; i++) {
-		for (int j = 0 ;j < 15; j++) {
-			cout << test1[i][j] << " ";
-		}
-		cout << '\n';
-	}
-	cout << "=====================================\n";
-	for(int i = 0 ;i < 15; i++) {
-		for (int j = 0 ;j < 15; j++) {
-			cout << test2[i][j] << " ";
-		}
-		cout << '\n';
-	}
-	cout << "=====================================\n";
-	for(int i = 0 ;i < 15; i++) {
-		for (int j = 0 ;j < 15; j++) {
-			cout << test3[i][j] << " ";
-		}
-		cout << '\n';
-	}
-
+	end = clock();
+	cout << "Time : " << (double)(end - start) << " ms. \n";
 }
