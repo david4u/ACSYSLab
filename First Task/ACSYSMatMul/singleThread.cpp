@@ -44,9 +44,13 @@ int** matmul1(int** m1, int** m2, int n) {
 
 int main() {
 	// initiallize
+	cout << "a\n";
 	int** mat1 = makeMAT(2048);
+	cout << "b\n";
 	int** mat2 = makeMAT(2048);
+	cout << "c\n";
 	int** mat3 = matmul1(mat1, mat2, 2048);
+	cout << "d\n";
 
 	int** test1 = makeMAT(15);
 	int** test2 = makeMAT(15);
