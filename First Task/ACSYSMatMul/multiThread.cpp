@@ -3,10 +3,12 @@
 #include <time.h>
 #include <vector>
 
-// init, alloc 분리
-// 뻔한 data로 singlethread검증
+// init, alloc 분리 ok
+// 뻔한 data로 singlethread검증 ok --> Identity Matrix로 검증
 // 복잡한 data로 multithread검증
 // mat 다양하게 자르기
+
+
 // makefile
 //.o * .o -> exe
 
@@ -19,8 +21,22 @@ int** makeMAT(int n) {
 	}
 	for (int r = 0; r < n; r++) {
 		for (int c = 0; c < n; c++) {
-			mat[r][c] = rand() % 10 - 4; //수식으로
+			mat[r][c] = rand() % 10 - 4;
 		}
+	}
+	return mat;
+}
+
+int** makeIdentity(int n) {
+	int** mat = new int*[n];
+	for (int i = 0; i< n; i++) {
+		mat[i] = new int[n];
+	}
+	for (int r = 0; r < n; r++) {
+		for (int c = 0; c < n; c++) {
+			mat[r][c] = 0;
+		}		
+		mat[r][r] = 1;
 	}
 	return mat;
 }
@@ -48,8 +64,7 @@ void multiply(int** m1,int** m2, int** ret, int n, int startrow, int endrow, int
     }
 }
 
-int** matmul2(int** m1, int** m2, int n) { // n -> original size
-    int** ret = makeZero(n);
+int** matmul2(int** m1, int** m2, int** ret, int n) { // n -> original size
     try {
         vector<thread> threads;
         int r1, r2, r3;
@@ -79,15 +94,18 @@ int** matmul2(int** m1, int** m2, int n) { // n -> original size
 
 int main() {
 	// initiallize
-	clock_t start, end;
+	struct timespec begin, end ;
+
+
 	int** mat1 = makeMAT(2048);
 	int** mat2 = makeMAT(2048);
-	start = clock();
+	int** mat3 = makeZero(2048);
     // FIXME
-    int** mat3 = matmul2(mat1, mat2, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+	mat3 = matmul2(mat1, mat2, mat3, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
     // FIXEND
-	end = clock();
-	cout << "Time : " << (double)(end - start) << " ns. \n";
+	cout << (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0 << endl;
 	for (int i = 0; i < 2048; i++) delete[] mat1[i];
 	for (int i = 0; i < 2048; i++) delete[] mat2[i];
 	for (int i = 0; i < 2048; i++) delete[] mat3[i];
@@ -95,3 +113,4 @@ int main() {
 	delete[] mat2;
 	delete[] mat3;
 }
+  
