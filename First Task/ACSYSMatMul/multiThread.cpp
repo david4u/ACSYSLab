@@ -5,6 +5,7 @@
 
 // init, alloc 분리 ok
 // 뻔한 data로 singlethread검증 ok --> Identity Matrix로 검증
+
 // 복잡한 data로 multithread검증
 // mat 다양하게 자르기
 
