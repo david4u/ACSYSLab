@@ -7,9 +7,8 @@
 // 뻔한 data로 singlethread검증 ok --> Identity Matrix로 검증
 
 // 복잡한 data로 multithread검증
+
 // mat 다양하게 자르기
-
-
 // makefile
 //.o * .o -> exe
 
@@ -103,7 +102,7 @@ int main() {
 	int** mat3 = makeZero(2048);
     // FIXME
 	clock_gettime(CLOCK_MONOTONIC, &begin);
-	mat3 = matmul2(mat1, mat2, mat3, 2048);
+	matmul2(mat1, mat2, mat3, 2048);
 	clock_gettime(CLOCK_MONOTONIC, &end);
     // FIXEND
 	cout << (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0 << endl;

@@ -3,6 +3,9 @@
 
 using namespace std;
 
+// 더 빠르게 하는 방법.
+// 월요일 온라인 1시반
+
 int** makeMAT(int n) {
 	int** mat = new int*[n];
 	for (int i = 0 ;i < n; i++) {
@@ -51,7 +54,6 @@ int** matmul1(int** m1, int** m2,int** ret, int n) { // n -> original size, m-> 
 			}
 		}
 	}
-	cout << "done\n";
 	return ret;
 }
 
@@ -92,6 +94,4 @@ int main() {
 	delete[] matI;
 	delete[] test1;
 	delete[] test2;
-
-	
 }
