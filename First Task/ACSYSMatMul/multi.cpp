@@ -95,19 +95,10 @@ void Multi::matmul4(int**m1, int**m2, int**ret, int n) { // 1   0
 void Multi::matmul5(int**m1, int**m2, int**ret, int n) { // 1   1
     try {
         vector<thread> threads;
-        int r1, r2, r3;
-        int c1, c2, c3;
-        r1 = n/4; // 512
-        r2 = r1*2; // 1024
-        r3 = r1*3; // 1536 ,, 2048
-        c1 = n/4;
-        c2 = c1*2;
-        c3 = c1*3;
-
-        threads.emplace_back(Multi::multiply, m1, m2, ret, n, 0, r1, 0, c1);
-        threads.emplace_back(Multi::multiply, m1, m2, ret, n, r1, r2, c1, c2);
-        threads.emplace_back(Multi::multiply, m1, m2, ret, n, r2, r3, c2, c3);
-        threads.emplace_back(Multi::multiply, m1, m2, ret, n, r3, n, c3, n);
+        threads.emplace_back(Multi::multiply, m1, m2, ret, n, 0, n/2, 0, n/2);
+        threads.emplace_back(Multi::multiply, m1, m2, ret, n, 0, n/2, n/2, n);
+        threads.emplace_back(Multi::multiply, m1, m2, ret, n, n/2, n, 0, n/2);
+        threads.emplace_back(Multi::multiply, m1, m2, ret, n, n/2, n, n/2, n);
 
         for (int i = 0; i < threads.size(); i++) {
             threads[i].join();
