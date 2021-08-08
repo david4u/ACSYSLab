@@ -9,13 +9,28 @@ using namespace std;
 int main() {
     // times[] -> single, single^T, multi~
     double times[11];
-    int** matA, matB, matI;
-    int** ret11, ret12, ret13, ret14, ret21, ret22, 
-        ret23, ret24, ret25, ret26, ret27, ret28, ret29;
+    int** matA;
+    int** matB;
+    int** matI;
+    int** ret11;
+    int** ret12;
+    int** ret13;
+    int** ret14;
+    int** ret21;
+    int** ret22;
+    int** ret23;
+    int** ret24;
+    int** ret25;
+    int** ret26;
+    int** ret27;
+    int** ret28;
+    int** ret29;
+    
     int size = 2048;
     Basic* basic;
     Single* single;
     Multi* multi;
+    struct timespec begin, end;
 
     // Make Matrices
 
@@ -61,8 +76,8 @@ int main() {
     // For validatoin ret12 == ret13 == matA
     cout << "Single thread validation check start\n";
     bool valid = true;
-    for (int i = 0; i < n ;i++) {
-        for int j = 0 ; j < n; j++) {
+    for (int i = 0; i < 2048 ;i++) {
+        for (int j = 0 ; j < 2048; j++) {
             if ( !( (ret12[i][j] == ret13[i][j]) && (ret12[i][j] == matA[i][j]) ) ) {
                 valid = false;
             }
@@ -200,7 +215,7 @@ int main() {
         cout << "Multi Thread matmul8 is incorrect\n";
     }
 
-    // multi matmul. Ret29 is 4x1
+    // multi matmul. Ret29 is 4x4
     cout << "Multi thread version 9 start\n";
 	clock_gettime(CLOCK_MONOTONIC, &begin);
     multi->matmul9(matA, matB, ret29, 2048);
