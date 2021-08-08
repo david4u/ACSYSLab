@@ -6,7 +6,7 @@ using namespace std;
 
 class Multi {
 public:
-	void multiply(int** m1,int** m2, int** ret, int n, int startrow, int endrow, int startcol, int endcol);
+	static void multiply(int** m1,int** m2, int** ret, int n, int startrow, int endrow, int startcol, int endcol);
 	//														i	j
 	void matmul1(int** m1, int** m2, int** m3, int n);	//	0	0
 	void matmul2(int** m1, int** m2, int** m3, int n);	//	0	1
