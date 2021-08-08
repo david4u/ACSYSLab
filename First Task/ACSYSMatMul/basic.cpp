@@ -41,3 +41,15 @@ int** Basic::makeZero(int n) {
 	}
 	return mat;
 }
+
+bool Basic::isSameResult(int** m1, int** m2, int n) {
+	bool ret = true;
+	for (int i = 0 ; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (!(m1[i][j] == m2[i][j])) {
+				ret = false;
+			}
+		}
+	}
+	return ret;
+}
