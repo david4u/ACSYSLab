@@ -17,7 +17,7 @@ void Single::transmatmul(int** m1, int** m2, int** ret, int n) {
     for (int i = 0 ;i < n; i++) {
         m3[i] = new int[n];
         for (int  j= 0; j < n; j++) {
-            m3[i][j] = m2[j][i]
+            m3[i][j] = m2[j][i];
         }
     }
     for (int r = 0; r < n ; r++) {
