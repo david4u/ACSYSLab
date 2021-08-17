@@ -6,6 +6,47 @@
 
 using namespace std;
 
+// command line arguments
+// -th=single -> single thread
+// -th=multi -> multi thread
+// -th dafault : single thread
+// -tr=true -> transpose matmul
+// -tr=false -> nontranspose matmul
+// -tr default : nontranspose matmul
+// -col=0, 1, 2, 3 -> in only multi thread, 2**columns divide
+// -row=0, 1, 2, 3 -> in only multi thread, 2**rows divide
+
+int main(int argc, char* argv[]) {
+    int thread, transpose, columns, rows;
+    // thread 0-> single thread, 1-> multi thread
+    // transpose 0-> false, 1-> true
+    // columns and rows -> default 0
+
+    if (argc == 1) { // only thread or transpose
+        thread = 0;
+        if (argv[1][1] == 't' && arv[1][2] == 'h' && ) { // thread argument
+            if (argv[1][4] == 's') {
+                thread = 
+            }
+        }
+
+
+    } else if (argc == 2) {
+
+    } else if (argc == 3) {
+
+    } else{
+        
+    }
+}
+
+
+
+
+
+
+
+
 int main() {
     // times[] -> single, single^T, multi~
     double times[11];
