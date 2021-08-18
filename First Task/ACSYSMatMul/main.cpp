@@ -16,6 +16,7 @@ using namespace std;
 // -col=0, 1, 2, 3 -> in only multi thread, 2**columns divide
 // -row=0, 1, 2, 3 -> in only multi thread, 2**rows divide
 
+/*
 int main(int argc, char* argv[]) {
     int thread, transpose, columns, rows;
     // thread 0-> single thread, 1-> multi thread
@@ -40,16 +41,12 @@ int main(int argc, char* argv[]) {
     }
 }
 
-
-
-
-
-
+*/
 
 
 int main() {
     // times[] -> single, single^T, multi~
-    double times[11];
+    double times[20];
     int** matA;
     int** matB;
     int** matI;
@@ -66,6 +63,15 @@ int main() {
     int** ret27;
     int** ret28;
     int** ret29;
+    int** ret31;
+    int** ret32;
+    int** ret33;
+    int** ret34;
+    int** ret35;
+    int** ret36;
+    int** ret37;
+    int** ret38;
+    int** ret39;
     
     int size = 2048;
     Basic* basic;
@@ -96,6 +102,15 @@ int main() {
     ret27 = basic->makeZero(size);
     ret28 = basic->makeZero(size);
     ret29 = basic->makeZero(size);
+    ret31 = basic->makeZero(size);
+    ret32 = basic->makeZero(size);
+    ret33 = basic->makeZero(size);
+    ret34 = basic->makeZero(size);
+    ret35 = basic->makeZero(size);
+    ret36 = basic->makeZero(size);
+    ret37 = basic->makeZero(size);
+    ret38 = basic->makeZero(size);
+    ret39 = basic->makeZero(size);
 
     //single thread A x B = ret11
     cout << "A x B in single thread start\n";
@@ -269,7 +284,137 @@ int main() {
     } else {
         cout << "Multi Thread matmul9 is incorrect\n";
     }
-    string muls[11];
+
+
+    // Transpose
+    // multi matmul. But ret31 is same with single
+    cout << "Multi thread version 1T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul1T(matA, matB, ret31, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 1T end\n";
+	times[11] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret31, 2048)) {
+        cout << "Multi Thread matmul1T is correct\n";
+    } else {
+        cout << "Multi Thread matmul1T is incorrect\n";
+    }
+    
+    // multi matmul. Ret32 is 1x2
+    cout << "Multi thread version 2T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul2T(matA, matB, ret32, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 2T end\n";
+	times[12] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret32, 2048)) {
+        cout << "Multi Thread matmul2T is correct\n";
+    } else {
+        cout << "Multi Thread matmul2T is incorrect\n";
+    }
+
+    // multi matmul. Ret33 is 1x4
+    cout << "Multi thread version 3T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul3T(matA, matB, ret33, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 3T end\n";
+	times[13] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret33, 2048)) {
+        cout << "Multi Thread matmul3T is correct\n";
+    } else {
+        cout << "Multi Thread matmul3T is incorrect\n";
+    }
+
+    // multi matmul. Ret34 is 2x1
+    cout << "Multi thread version 4T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul4T(matA, matB, ret34, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 4T end\n";
+	times[14] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret34, 2048)) {
+        cout << "Multi Thread matmul4T is correct\n";
+    } else {
+        cout << "Multi Thread matmul4T is incorrect\n";
+    }
+
+    // multi matmul. Ret35 is 2x2
+    cout << "Multi thread version 5T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul5T(matA, matB, ret35, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 5T end\n";
+	times[15] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret35, 2048)) {
+        cout << "Multi Thread matmul5T is correct\n";
+    } else {
+        cout << "Multi Thread matmul5T is incorrect\n";
+    }
+
+    // multi matmul. Ret36 is 2x4
+    cout << "Multi thread version 6T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul6T(matA, matB, ret36, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 6T end\n";
+	times[16] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret36, 2048)) {
+        cout << "Multi Thread matmul6T is correct\n";
+    } else {
+        cout << "Multi Thread matmul6T is incorrect\n";
+    }
+
+    // multi matmul. Ret37 is 4x1
+    cout << "Multi thread version 7T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul7T(matA, matB, ret37, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 7T end\n";
+	times[17] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret37, 2048)) {
+        cout << "Multi Thread matmul7T is correct\n";
+    } else {
+        cout << "Multi Thread matmul7T is incorrect\n";
+    }
+
+    // multi matmul. Ret38 is 4x2
+    cout << "Multi thread version 8T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul8T(matA, matB, ret38, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 8T end\n";
+	times[18] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret38, 2048)) {
+        cout << "Multi Thread matmul8T is correct\n";
+    } else {
+        cout << "Multi Thread matmul8T is incorrect\n";
+    }
+
+    // multi matmul. Ret39 is 4x4
+    cout << "Multi thread version 9T start\n";
+	clock_gettime(CLOCK_MONOTONIC, &begin);
+    multi->matmul9T(matA, matB, ret39, 2048);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+    cout << "Multi thread version 9T end\n";
+	times[10] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+
+    if (basic->isSameResult(ret11, ret39, 2048)) {
+        cout << "Multi Thread matmul9T is correct\n";
+    } else {
+        cout << "Multi Thread matmul9T is incorrect\n";
+    }
+
+
+    string muls[20];
     muls[0] = "Single 1 x 1";
     muls[1] = "SIngle 1 x 1 Transpose";
     muls[2] = "Multi 1 x 1";
@@ -280,8 +425,17 @@ int main() {
     muls[7] = "Multi 2 x 4";
     muls[8] = "Multi 4 x 1";
     muls[9] = "Multi 4 x 2";
-    muls[10] = "Multi 4 x 4";
-    for (int i = 0; i < 11; i++) {
+    muls[10] = "Multi transpose 4 x 4";
+    muls[11] = "Multi transpose 1 x 1";
+    muls[12] = "Multi transpose 1 x 2";
+    muls[13] = "Multi transpose 1 x 4";
+    muls[14] = "Multi transpose 2 x 1";
+    muls[15] = "Multi transpose 2 x 2";
+    muls[16] = "Multi transpose 2 x 4";
+    muls[17] = "Multi transpose 4 x 1";
+    muls[18] = "Multi transpose 4 x 2";
+    muls[19] = "Multi transpose 4 x 4";
+    for (int i = 0; i < 20; i++) {
         cout << muls[i] << " time is : " << times[i] << '\n';
     }
     // Delete Matrices
@@ -301,6 +455,15 @@ int main() {
 	for (int i = 0; i < 2048; i++) delete[] ret27[i];
     for (int i = 0; i < 2048; i++) delete[] ret28[i];
 	for (int i = 0; i < 2048; i++) delete[] ret29[i];
+    for (int i = 0; i < 2048; i++) delete[] ret31[i];
+	for (int i = 0; i < 2048; i++) delete[] ret32[i];
+    for (int i = 0; i < 2048; i++) delete[] ret33[i];
+	for (int i = 0; i < 2048; i++) delete[] ret34[i];
+    for (int i = 0; i < 2048; i++) delete[] ret35[i];
+	for (int i = 0; i < 2048; i++) delete[] ret36[i];
+	for (int i = 0; i < 2048; i++) delete[] ret37[i];
+    for (int i = 0; i < 2048; i++) delete[] ret38[i];
+	for (int i = 0; i < 2048; i++) delete[] ret39[i];
 
     delete[] matA;
     delete[] matB;
@@ -318,5 +481,14 @@ int main() {
     delete[] ret27;
     delete[] ret28;
     delete[] ret29;
+    delete[] ret31;
+    delete[] ret32;
+    delete[] ret33;
+    delete[] ret34;
+    delete[] ret35;
+    delete[] ret36;
+    delete[] ret37;
+    delete[] ret38;
+    delete[] ret39;
     return 0;
 }
