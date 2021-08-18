@@ -405,7 +405,7 @@ int main() {
     multi->matmul9T(matA, matB, ret39, 2048);
 	clock_gettime(CLOCK_MONOTONIC, &end);
     cout << "Multi thread version 9T end\n";
-	times[10] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
+	times[19] = (end.tv_sec - begin.tv_sec) + (end.tv_nsec - begin.tv_nsec) / 1000000000.0;
 
     if (basic->isSameResult(ret11, ret39, 2048)) {
         cout << "Multi Thread matmul9T is correct\n";
